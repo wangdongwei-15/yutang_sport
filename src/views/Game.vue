@@ -1,6 +1,6 @@
 <template>
   <div class="game">
-    关于
+    活动
   </div>
 </template>
 

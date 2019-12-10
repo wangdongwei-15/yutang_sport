@@ -1,6 +1,6 @@
 <template>
   <div class="game">
-    关于
+    发现
   </div>
 </template>
 
