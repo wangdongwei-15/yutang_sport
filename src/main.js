@@ -16,6 +16,23 @@ import "amfe-flexible";
 
 Vue.config.productionTip = false
 
+//let token = "ac02ov8r0t09rbmd4tsrgtr6o6";
+//axios.defaults.headers.common['Authorization'] = 'Bearer '+token;
+
+// 路由请求拦截器 
+axios.interceptors.request.use(
+  config => {
+     let token = sessionStorage.getItem("token");
+      if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+          config.headers.Authorization = 'Bearer '+token;
+      }
+      return config;
+  },
+  err => {
+      return Promise.reject(err);
+  });
+
+
 new Vue({
   router,
   render: h => h(App)

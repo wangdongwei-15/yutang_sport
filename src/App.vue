@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view/>
+    
+      <router-view/>
+    
+    
     <van-tabbar v-model="active" route v-show="showTabBar">
         <van-tabbar-item icon="home-o" to='/venue'>场馆</van-tabbar-item>
         <van-tabbar-item icon="apps-o" to='/game'>活动</van-tabbar-item>

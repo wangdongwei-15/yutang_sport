@@ -74,7 +74,7 @@ export default {
     scroll(){
 
       window.onscroll = ()=>{
-
+      
         //let clientHeight = document.documentElement.clientHeight;
 
         // 屏幕的高度
@@ -95,14 +95,20 @@ export default {
            this.onSearch();
         }
         
-          
       }
    
     }
+  
 
+  },
 
+  beforeDestroy(){
+    
+    // 注销滚动事件
+    window.onscroll = null;
+    
   }
-
+  
 
 }
 </script>

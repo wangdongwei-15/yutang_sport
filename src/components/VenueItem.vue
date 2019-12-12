@@ -1,6 +1,6 @@
 <template>
 
-   <dl  class="item" >
+   <dl  class="item" @click="detail(venue.id)">
         <dt><img src="../assets/imgs/img_01.jpg"></dt>
         <dd>
             <h3>{{venue.name}}</h3>
@@ -13,7 +13,17 @@
 
 <script>
 export default {
-    props:['venue']
+
+    props:['venue'],
+    methods:{
+
+       detail(id){
+          this.$router.push({path:'/detail',query:{
+              id
+          }});
+       }
+
+    }
 }
 </script>
 
