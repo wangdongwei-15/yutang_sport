@@ -169,9 +169,7 @@ export default {
 
 <style  lang="less">
 
-.order{
-
-   
+.order{  
 
     .van-nav-bar{
     background: #3298ed!important;

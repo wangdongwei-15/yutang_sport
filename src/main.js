@@ -32,6 +32,22 @@ axios.interceptors.request.use(
       return Promise.reject(err);
   });
 
+// 响应式拦截器
+
+// axios.interceptors.response.use(
+//   response => {
+//       return response;
+//   },
+//   error => {
+//       if (error.response) {
+//           switch (error.response.status) {
+//               case 401:
+//                   // 退出登录, 跳转到登录页;
+//           }
+//       }
+//       return Promise.reject(error.response.data)   // 返回接口返回的错误信息
+//   });
+
 
 new Vue({
   router,

@@ -3,14 +3,10 @@
      <div class="about-wrap">
     	<div class="about-header">
     		
-    		<div v-if="isLogin" class="user-info">
-    			<img src="../assets/imgs/icons/1553221126.jpg" />
-    			<span>韩梅梅</span>
-    		</div>
-    		
-    		<div v-else class="default-info">
-	    		<img  src="../assets/imgs/icons/default.jpg" />
-	    		<input class="upload" @change='add_img'  type="file" value="上传头像">
+    		<div class="default-info">
+	    		<img  :src="user.icon" />
+	    		<input class="upload" @change='add_img'  type="file" value="上传头像" > 
+				<span>{{user.name}}</span>
     		</div>
     		
     	</div>
@@ -20,13 +16,11 @@
 			  <van-cell title="我的订单" is-link />
 			  <van-cell title="我的活动" is-link to="my_game"/>
 			  <van-cell title="我的场馆" is-link/>
-			  <van-cell title="我的优惠券" is-link/>
 			  <van-cell title="意见反馈" is-link/>
+			    <van-cell title="退出登录" is-link @click="logout"/>
 			</van-cell-group>
     		
     	</div>
-
-      <van-button type="primary" @click="logout">退出登录</van-button>
     	
     </div>
     
@@ -39,13 +33,17 @@ export default {
   
   data(){
     return {
-        isLogin:false
+		isLogin:true,
+		user:{
+			icon:require('@/assets/imgs/icons/default.jpg'),
+			name:''
+		}
     }
   },
 
   created(){
       this.$http.get('user').then(res=>{
-        console.log(res);
+         console.log(res);
       });
   },
 
@@ -55,7 +53,18 @@ export default {
         sessionStorage.removeItem("token");
         this.$router.push('/login');
     },
-    add_img(){
+    async add_img(event){
+		
+		// 准备上传文件
+		let img = event.target.files[0];
+		let form = new FormData();
+		form.append("icon",img,img.name);
+
+		// 上传请求
+		let { data:res } = await this.$http.post('user/save_icon',form);
+
+		this.user = res.data;
+
 
     }   
 
@@ -69,6 +78,22 @@ export default {
 
 <style scoped>
 
+.default-info{
+	position: relative;
+	width:128px;
+	height: 128px;
+}
+
+.default-info input{
+	width:128px;
+	height: 128px;
+	position: absolute;
+	left:0;
+	top:0;
+	overflow: hidden;
+	opacity: 0;
+	z-index: 1000;
+}
 
 .about-header{
 	height: 328px;
@@ -82,7 +107,7 @@ export default {
 .about-header img{
 	width:128px;
 	border-radius: 50%;
-	margin-bottom: 30px;
+	
 }
 
 .user-info{
@@ -97,7 +122,7 @@ export default {
 }
 
 .default-info{
-	height: 250px;
+	height: 128px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

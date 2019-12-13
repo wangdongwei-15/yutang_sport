@@ -12,6 +12,9 @@ import Detail from '../views/Detail';
 import Order from '../views/Order';
 import Login from '../views/Login';
 import Register from '../views/Register';
+import MyGame from '../views/MyGame';
+import CreateGame from '../views/CreateGame';
+import SelectVenue from '../views/SelectVenue';
 
 
 Vue.use(VueRouter)
@@ -70,6 +73,21 @@ const routes = [
     path: '/register',
     name: 'register',
     component: Register
+  },
+  {
+    path: '/my_game',
+    name: 'my_game',
+    component: MyGame
+  },
+  {
+    path: '/create_game',
+    name: 'create_game',
+    component: CreateGame
+  },
+  {
+    path: '/select_venue',
+    name: 'select_venue',
+    component: SelectVenue
   }
  
 ]

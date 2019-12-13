@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     
-      <router-view/>
+      <keep-alive>
+         <router-view/>
+      </keep-alive>
+      
     
     
     <van-tabbar v-model="active" route v-show="showTabBar">
