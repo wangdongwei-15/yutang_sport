@@ -15,7 +15,9 @@ import Register from '../views/Register';
 import MyGame from '../views/MyGame';
 import CreateGame from '../views/CreateGame';
 import SelectVenue from '../views/SelectVenue';
-
+import GameDetail from '../views/GameDetail';
+import FriendMsgs from '../views/FriendMsgs';
+import CreateFriendMsg from '../views/CreateFriendMsg';
 
 Vue.use(VueRouter)
 
@@ -88,8 +90,23 @@ const routes = [
     path: '/select_venue',
     name: 'select_venue',
     component: SelectVenue
+  },
+  {
+    path: '/game_detail',
+    name: 'game_detail',
+    component: GameDetail
+  },
+  {
+    path: '/friend_msgs',
+    name: 'friend_msgs',
+    component: FriendMsgs
+  },
+  {
+    path: '/create_friend_msg',
+    name: 'create_friend_msg',
+    component: CreateFriendMsg
   }
- 
+  
 ]
 
 const router = new VueRouter({

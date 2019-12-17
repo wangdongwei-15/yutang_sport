@@ -1,16 +1,15 @@
 <template>
   <div id="app">
     
-      <keep-alive>
+      <keep-alive include="venue,create_game">
          <router-view/>
       </keep-alive>
-      
     
     
     <van-tabbar v-model="active" route v-show="showTabBar">
         <van-tabbar-item icon="home-o" to='/venue'>场馆</van-tabbar-item>
         <van-tabbar-item icon="apps-o" to='/game'>活动</van-tabbar-item>
-        <van-tabbar-item icon="comment-o" to='/find'>发现</van-tabbar-item>
+        <van-tabbar-item icon="comment-o" to='/friend_msgs'>发现</van-tabbar-item>
         <van-tabbar-item icon="friends-o" to='/about'>关于</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -45,7 +44,7 @@ export default {
 
      showTabBar(){
 
-        let whiteList = ['venue','game','find','about'];
+        let whiteList = ['venue','game','friend_msgs','about'];
         if(whiteList.indexOf(this.$route.name) == -1){
             return false;
         }else{

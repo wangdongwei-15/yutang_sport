@@ -14,7 +14,19 @@
             <div class="my_join">内容1</div>
         </van-tab>
         <van-tab title="我的发布"> 
-            <div class="my_create">内容2</div>
+            <div class="my_create">
+                <dl v-for="cGame in createGameList" :key="cGame.id" class="game-item">
+                    <dt>
+                        <p>{{cGame.title}}</p>
+                    </dt>
+                    <dd>{{cGame.created_at}}</dd>
+                    <dd>
+                        <van-button type="primary" size="mini">编辑</van-button>
+                        <van-button type="danger" size="mini">删除</van-button>
+                         <van-button type="warning" size="mini">详情</van-button>
+                    </dd>
+                </dl>
+            </div>
         </van-tab>
     </van-tabs>   
     </div> 
@@ -28,12 +40,36 @@ export default {
     data(){
 
         return {
-            active:0
+            active:0,
+            createGameList:[],
+            joinGameList:[]
         }
 
     },
 
+    created(){
+        
+        // 获取发布活动
+         this.getCreateGames();
+
+        // 获取加入的活动 
+        this.getJoinGames();
+
+    },
+
     methods:{
+
+        // 获取发布的活动
+        async getCreateGames(){
+            let { data:res } = await this.$http.get('user/my_create_games');
+            this.createGameList = res.data.data;
+        },
+       
+        async getJoinGames(){
+            let { data:res } = await this.$http.get('user/my_join_games');
+             console.log(res);
+
+        },
 
         // 发布
         create_game(){
@@ -73,4 +109,17 @@ export default {
 .my_join,.my_create{
     padding:30px;
 }
+
+.game-item{
+    font-size: 25px;
+    padding:20px 0;
+    border-bottom: 1px #ddd solid;
+    dt,dd{
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 60px;
+    }
+}
+
+
 </style>

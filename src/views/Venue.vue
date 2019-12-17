@@ -27,6 +27,7 @@
 import VenueItem from "../components/VenueItem";
 
 export default {
+  name:'venue',
   
   data(){
       return {

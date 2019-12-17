@@ -31,6 +31,8 @@
 
 
 export default {
+    
+    name:'select_venue',
 
     data(){
         return {

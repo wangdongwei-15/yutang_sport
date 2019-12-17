@@ -11,15 +11,16 @@
         <div class="body">
 
            <van-cell-group>
+
 			  <van-field
 			    v-model="game.title"
 			    label="活动标题"
 			    placeholder="请输入活动标题"
 			  />
 
-              <van-cell title="活动项目" is-link :value="typeName" @click="showTypeList" />
-               <van-cell title="活动场馆" is-link :value="veneuName" @click="selectVenue" />
-              <van-cell title="活动时间" is-link :value="game.datetime" @click="showDateList" />
+               <van-cell title="活动项目" is-link :value="typeName" @click="showTypeList" />
+               <van-cell title="活动场馆" is-link :value="veneuName|ellipsis" @click="selectVenue" />
+               <van-cell title="活动时间" is-link :value="game.datetime" @click="showDateList" />
                <van-cell title="活动人数" is-link  >
                     <van-stepper v-model="game.number" slot="right-icon" />
                </van-cell>
@@ -38,11 +39,9 @@
             </van-cell-group>  
 
             <div class="btn-wrap">
-               <van-button type="primary">保存活动</van-button>
+               <van-button type="primary" @click="saveGame">保存活动</van-button>
             </div>
-            
-         
-
+        
         </div>
 
         <!-- 类型列表 -->
@@ -60,7 +59,7 @@
             @confirm = "confirm"
             />
         </van-popup>
-
+        
     </div> 
 
 </template>
@@ -71,6 +70,8 @@ import { formatTime } from '@/assets/util.js';
 
 export default {
 
+    name:'create_game',
+    
     data(){
 
         return {
@@ -95,14 +96,19 @@ export default {
 
     },
 
-    // 组件的路由钩子函数
+    // 组件路由钩子函数
     beforeRouteEnter(to,from,next){
 
        if(from.name=="select_venue"){
+
            console.log('你是从select_venue路由过来的'); 
            next(vm=>{
-               console.log(vm.$route);
+               if(!vm.$route.params.venue) return false;
+               let venue = vm.$route.params.venue;
+               vm.veneuName = venue.name;
+               vm.game.venue_id = venue.id;
            });
+           
        }else{
            next();
        }
@@ -118,6 +124,21 @@ export default {
 
     methods:{
 
+        // 保存活动
+        async saveGame(){
+
+            console.log(this.game);
+
+            let { data:res } = await this.$http.post('game/save',this.game);
+
+            console.log(res);
+            if(res.code !== 200) return this.$toast("活动保存失败!")
+
+            this.$toast("活动保存成功!");
+
+            this.$router.push('my_game');
+
+        },
         
         // 选择场馆
         selectVenue(){
@@ -178,7 +199,17 @@ export default {
         }
        
         
-    }
+    },
+
+    filters: {
+        ellipsis (value) {
+        if (!value) return ''
+        if (value.length > 20) {
+            return value.slice(0,20) + '...'
+        }
+        return value
+        }
+   },
 
 }
 

@@ -43,7 +43,8 @@ export default {
 
   created(){
       this.$http.get('user').then(res=>{
-         console.log(res);
+		 //console.log(res);
+		 this.user = res.data.data
       });
   },
 

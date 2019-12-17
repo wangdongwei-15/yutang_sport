@@ -32,17 +32,32 @@ axios.interceptors.request.use(
       return Promise.reject(err);
   });
 
-// 响应式拦截器
 
+// 响应式拦截器
 // axios.interceptors.response.use(
+
 //   response => {
-//       return response;
+
+//       if(response.data.code == 401){
+//          sessionStorage.removeItem('token');
+//          router.push('/login');
+//          return false;
+//       }
+      
+
 //   },
 //   error => {
+//       console.log('error:');
+//       console.log(error);
+
+//       return false;
+
 //       if (error.response) {
 //           switch (error.response.status) {
 //               case 401:
 //                   // 退出登录, 跳转到登录页;
+//                   sessionStorage.removeItem('token');
+//                   this.$router.push('/login');
 //           }
 //       }
 //       return Promise.reject(error.response.data)   // 返回接口返回的错误信息
