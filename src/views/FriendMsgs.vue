@@ -12,7 +12,7 @@
                     <span>{{friendMsg.user.name}}</span>
                     <p>{{friendMsg.message}}</p>
                     <div class="img-list">
-                        <img :src='imgSrc' v-for="imgSrc in friendMsg.imgs" :key="imgSrc">
+                        <img :src='imgSrc' v-for="(imgSrc,index) in friendMsg.imgs" :key="imgSrc" @click="preview(friendMsg.imgs,index)">
                     </div>
 
                 </dd>
@@ -25,6 +25,9 @@
 </template>
 
 <script>
+
+import { ImagePreview }  from "vant";
+
 export default {
     data(){
        return {
@@ -51,6 +54,14 @@ export default {
 
     methods:{
 
+        // 预览图片
+        preview(imgArr,index){
+           ImagePreview({
+               images:imgArr,
+               startPosition: index
+           });
+        },
+
         back(){
             this.$router.back();
         },
@@ -75,7 +86,7 @@ export default {
 
             if(this.isFinish) return  this.$toast("亲,没有更多数据了!");
             if( this.isLoading) return false;
-            
+
             this.getFriendMsgs();
 
         },

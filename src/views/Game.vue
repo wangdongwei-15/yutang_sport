@@ -54,7 +54,6 @@ export default {
 
       let { data:res } = await this.$http.get('game/list?page=2');
       this.gameList = res;
-      console.log(res);
       
     },
        
