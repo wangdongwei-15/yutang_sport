@@ -18,6 +18,7 @@ import SelectVenue from '../views/SelectVenue';
 import GameDetail from '../views/GameDetail';
 import FriendMsgs from '../views/FriendMsgs';
 import CreateFriendMsg from '../views/CreateFriendMsg';
+import MyOrder from '../views/MyOrder';
 
 Vue.use(VueRouter)
 
@@ -105,6 +106,11 @@ const routes = [
     path: '/create_friend_msg',
     name: 'create_friend_msg',
     component: CreateFriendMsg
+  },
+  {
+    path: '/my_orders',
+    name: 'my_orders',
+    component: MyOrder
   }
   
 ]

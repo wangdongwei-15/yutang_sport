@@ -4,7 +4,10 @@
           title="朋友圈"
           left-arrow
           @click-left="back"
-          />
+          @click-right="createMessage"
+          >
+           <van-icon name="plus" slot="right" />
+        </van-nav-bar>
         <div class="body">
             <dl v-for="friendMsg in friendMsgs" :key="friendMsg.id">
                 <dt><img :src="friendMsg.user.icon_url"></dt>
@@ -53,6 +56,11 @@ export default {
   
 
     methods:{
+
+        // 发布朋友圈
+        createMessage(){
+            this.$router.push('/create_friend_msg');
+        },
 
         // 预览图片
         preview(imgArr,index){

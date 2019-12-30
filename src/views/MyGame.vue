@@ -11,15 +11,26 @@
 
     <van-tabs v-model="active">
         <van-tab title="我的参与">
-            <div class="my_join">内容1</div>
+            <div class="my_join">
+                <dl v-for="joinGame in joinGameList" :key="joinGame.id" class="game-item">
+                    <dt>
+                        <p>{{joinGame.title}}</p>
+                    </dt>
+                    <dd>{{joinGame.created_at}}</dd>
+                    <dd>
+                        <van-button type="warning" size="mini">详情</van-button>
+                    </dd>
+                </dl>
+
+            </div>
         </van-tab>
         <van-tab title="我的发布"> 
             <div class="my_create">
-                <dl v-for="cGame in createGameList" :key="cGame.id" class="game-item">
+                <dl v-for="createGame in createGameList" :key="createGame.id" class="game-item">
                     <dt>
-                        <p>{{cGame.title}}</p>
+                        <p>{{createGame.title}}</p>
                     </dt>
-                    <dd>{{cGame.created_at}}</dd>
+                    <dd>{{createGame.created_at}}</dd>
                     <dd>
                         <van-button type="primary" size="mini">编辑</van-button>
                         <van-button type="danger" size="mini">删除</van-button>
@@ -66,9 +77,10 @@ export default {
         },
        
         async getJoinGames(){
-            let { data:res } = await this.$http.get('user/my_join_games');
-             console.log(res);
 
+            let { data:res } = await this.$http.get('user/my_join_games');
+            this.joinGameList = res.data.data;
+            
         },
 
         // 发布

@@ -1,8 +1,9 @@
 <template>
     <div class="create-friend-msg">
-        <van-cell title="取消" >
-           <van-button type="primary" slot="right-icon" size="mini" @click="saveFriendMsgs">发表</van-button> 
-        </van-cell>
+
+        <van-nav-bar  left-text="取消" left-arrow @click-left="goBack">
+            <van-button type="primary" slot="right" size="mini" @click="saveFriendMsgs">发表</van-button> 
+        </van-nav-bar>
 
         <div class="body">
              <van-cell-group>
@@ -31,6 +32,10 @@ export default {
         }
     },
     methods:{
+
+        goBack(){
+            this.$router.back();
+        },
         
         afterRead(val){
             

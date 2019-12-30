@@ -1,5 +1,5 @@
 <template>
-    <div class="venue-container">
+    <div class="container" ref="wrap">
          <div class="header">
              <van-search placeholder="请输入搜索关键词"  @focus="goSearch" />
               <van-dropdown-menu >
@@ -13,8 +13,7 @@
                  <VenueItem :venue="item" :key="item.id"></VenueItem>
              </template>
 
-            <div  class="more" @click='getMore'>
-              加载更多
+            <div  class="more">
               <van-loading v-show="isLoading" type="spinner" color="#1989fa" class="loadding-icon" />
             </div>
          </div>
@@ -44,6 +43,11 @@ export default {
   created(){
     this.getTypeList();
     this.getVenueList();
+    
+  },
+
+  mounted(){
+    this.loadScroll();
   },
 
   components:{
@@ -51,6 +55,33 @@ export default {
   },
  
   methods:{
+
+    // 页面滚动到底部触发加载更多;
+     // 滚动加载
+        loadScroll(){
+
+            window.onscroll = ()=>{
+
+                // 屏幕的高度
+                let clientHeight = window.innerHeight;
+
+                // 内容区高度
+               //let offsetHeight = document.documentElement.offsetHeight;
+                let offsetHeight = this.$refs.wrap.offsetHeight;
+
+                // 滚动距离
+                let scrollTop = document.documentElement.scrollTop;
+
+                let bottomOfWindow  = scrollTop  >= offsetHeight - clientHeight;
+
+                if(bottomOfWindow){
+                    this.getMore();
+                    //console.log("more");
+                }
+                
+            }
+        
+       },
 
     changeType(){
       
@@ -104,11 +135,11 @@ export default {
       if(this.isFinish) this.$toast('亲,没有更多数据了!');
       
        // 判断当前是否正在加载数据
-      if(this.isLoading || this.isFinish ) return false;
+      if(this.isLoading ) return false;
       
       this.page++;
       this.getVenueList();
-
+      
     }
 
   }
