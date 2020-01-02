@@ -2,22 +2,24 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Home from '../components/Home';
-
-import Venue from '../views/Venue';
-import Game from '../views/Game';
+import Search from '../views/Search';
 import Find from '../views/Find';
 import About from '../views/About';
-import Search from '../views/Search';
-import Detail from '../views/Detail';
-import Order from '../views/Order';
-import Login from '../views/Login';
-import Register from '../views/Register';
-import MyGame from '../views/MyGame';
-import CreateGame from '../views/CreateGame';
-import SelectVenue from '../views/SelectVenue';
-import GameDetail from '../views/GameDetail';
 import FriendMsgs from '../views/FriendMsgs';
 import CreateFriendMsg from '../views/CreateFriendMsg';
+
+const Venue = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Venue');
+const Detail = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Detail');
+const Order = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Order');
+const Login = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Login');
+const Register = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Register');
+
+
+const Game = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Game');
+const MyGame = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/MyGame');
+const CreateGame = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/CreateGame');
+const SelectVenue = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/SelectVenue');
+const GameDetail = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/GameDetail');
 
 Vue.use(VueRouter)
 

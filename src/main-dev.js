@@ -12,6 +12,12 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
 
+
+// 进度条
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+
 import "amfe-flexible";
 
 Vue.config.productionTip = false
@@ -22,6 +28,10 @@ Vue.config.productionTip = false
 // 路由请求拦截器 
 axios.interceptors.request.use(
   config => {
+
+       // 启动进度条加载
+      NProgress.start();
+
      let token = sessionStorage.getItem("token");
       if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
           config.headers.Authorization = 'Bearer '+token;
@@ -33,39 +43,17 @@ axios.interceptors.request.use(
   });
 
 
-// 响应式拦截器
-// axios.interceptors.response.use(
-
-//   response => {
-
-//       if(response.data.code == 401){
-//          sessionStorage.removeItem('token');
-//          router.push('/login');
-//          return false;
-//       }
-      
-
-//   },
-//   error => {
-//       console.log('error:');
-//       console.log(error);
-
-//       return false;
-
-//       if (error.response) {
-//           switch (error.response.status) {
-//               case 401:
-//                   // 退出登录, 跳转到登录页;
-//                   sessionStorage.removeItem('token');
-//                   this.$router.push('/login');
-//           }
-//       }
-//       return Promise.reject(error.response.data)   // 返回接口返回的错误信息
-//   });
-
+  // 响应拦截器
+  axios.interceptors.response.use(config =>{
+    //当进入response拦截器，表示请求已经结束，我们就结束进度条
+    NProgress.done()
+    return config
+  })
 
 new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+console.log('dev');
 
