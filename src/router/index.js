@@ -7,6 +7,7 @@ import Find from '../views/Find';
 import About from '../views/About';
 import FriendMsgs from '../views/FriendMsgs';
 import CreateFriendMsg from '../views/CreateFriendMsg';
+import MyOrder from '../views/MyOrder';
 
 const Venue = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Venue');
 const Detail = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Detail');
@@ -107,6 +108,11 @@ const routes = [
     path: '/create_friend_msg',
     name: 'create_friend_msg',
     component: CreateFriendMsg
+  },
+  {
+    path: '/my_orders',
+    name: 'my_orders',
+    component: MyOrder
   }
   
 ]

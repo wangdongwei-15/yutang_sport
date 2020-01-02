@@ -13,7 +13,7 @@
     	
     	<div class="about-body">
     		<van-cell-group>
-			  <van-cell title="我的订单" is-link />
+			  <van-cell title="我的订单" is-link to="my_orders"/>
 			  <van-cell title="我的活动" is-link to="my_game"/>
 			  <van-cell title="我的场馆" is-link/>
 			  <van-cell title="意见反馈" is-link/>
