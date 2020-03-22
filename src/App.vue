@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     
-      <keep-alive include="venue,create_game">
-         <router-view/>
-      </keep-alive>
+    <keep-alive include="venue,create_game">
+        <router-view/>
+    </keep-alive>
     
     
     <van-tabbar v-model="active" route v-show="showTabBar">
@@ -12,6 +12,7 @@
         <van-tabbar-item icon="comment-o" to='/friend_msgs'>发现</van-tabbar-item>
         <van-tabbar-item icon="friends-o" to='/about'>关于</van-tabbar-item>
     </van-tabbar>
+    
   </div>
 </template>
 <script>

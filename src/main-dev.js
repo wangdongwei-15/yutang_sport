@@ -12,7 +12,6 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
 
-
 // 进度条
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -50,7 +49,7 @@ axios.interceptors.request.use(
     return config
   })
 
-new Vue({
+ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')

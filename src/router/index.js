@@ -8,6 +8,7 @@ import About from '../views/About';
 import FriendMsgs from '../views/FriendMsgs';
 import CreateFriendMsg from '../views/CreateFriendMsg';
 import MyOrder from '../views/MyOrder';
+import BMap from '../views/BMap';
 
 const Venue = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Venue');
 const Detail = () => import(/* webpackChunkName: "venue_detail_order" */ '../views/Detail');
@@ -29,6 +30,11 @@ const routes = [
     path: '/',
     name: 'home',
     redirect:'/venue'
+  },
+  {
+    path: '/map',
+    name: 'map',
+    component: BMap
   },
   {
     path: '/venue',
@@ -118,6 +124,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode:'history',
   routes
 })
 

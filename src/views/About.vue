@@ -12,12 +12,14 @@
     	</div>
     	
     	<div class="about-body">
+			{{obj.name}} -- {{obj.age}}
     		<van-cell-group>
 			  <van-cell title="我的订单" is-link to="my_orders"/>
 			  <van-cell title="我的活动" is-link to="my_game"/>
 			  <van-cell title="我的场馆" is-link/>
 			  <van-cell title="意见反馈" is-link/>
 			    <van-cell title="退出登录" is-link @click="logout"/>
+				<van-button @click="change">测试按钮</van-button>
 			</van-cell-group>
     		
     	</div>
@@ -37,6 +39,11 @@ export default {
 		user:{
 			icon:require('@/assets/imgs/icons/default.jpg'),
 			name:''
+		},
+		arr:['tom','rose'],
+		obj:{
+			name:'tom',
+			age:18
 		}
     }
   },
@@ -49,6 +56,17 @@ export default {
   },
 
   methods:{
+
+	change(){
+
+		// let vm = this;
+		// //this.arr[0] = 'peter';
+		// //this.$set(vm.arr, 0, 'peter')
+		// this.arr.splice(0, 1, 'john');
+		// console.log('john');
+		this.obj.name = 'rose';
+		console.log('rose');
+	},
 
     logout(){
         sessionStorage.removeItem("token");

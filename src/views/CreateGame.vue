@@ -97,21 +97,27 @@ export default {
     },
 
     // 组件路由钩子函数
-    beforeRouteEnter(to,from,next){
+    // beforeRouteEnter(to,from,next){
 
-       if(from.name=="select_venue"){
+    //    if(from.name=="select_venue"){
 
-           console.log('你是从select_venue路由过来的'); 
-           next(vm=>{
-               if(!vm.$route.params.venue) return false;
-               let venue = vm.$route.params.venue;
-               vm.veneuName = venue.name;
-               vm.game.venue_id = venue.id;
-           });
+    //        console.log('你是从select_venue路由过来的'); 
+    //        next(vm=>{
+    //            if(!vm.$route.params.venue) return false;
+    //            let venue = vm.$route.params.venue;
+    //            vm.veneuName = venue.name;
+    //            vm.game.venue_id = venue.id;
+    //        });
            
-       }else{
-           next();
-       }
+    //    }else{
+    //        next();
+    //    }
+       
+    // }, 
+
+    activated(params){
+
+       console.log(this.$route.params);
        
     }, 
 
